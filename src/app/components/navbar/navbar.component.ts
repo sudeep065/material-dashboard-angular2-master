@@ -1,7 +1,10 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
-import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import { DialogOverviewExampleDialog } from '../common/dialog.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-navbar',
@@ -14,12 +17,14 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(location: Location,  private element: ElementRef, private router: Router) {
+    constructor(location: Location,  private element: ElementRef, private router: Router,
+        public dialog: MatDialog, private _snackBar: MatSnackBar) {
       this.location = location;
           this.sidebarVisible = false;
     }
 
-    ngOnInit(){
+    ngOnInit() {
+        this.openSnackBar('Please check our website frequently many topics will be added', 'This is SnackBar Sample.');
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
@@ -121,4 +126,18 @@ export class NavbarComponent implements OnInit {
       }
       return 'Dashboard';
     }
+
+    openDialog() {
+        const dialogRef = this.dialog.open(DialogOverviewExampleDialog);
+    
+        dialogRef.afterClosed().subscribe(result => {
+          console.log(`Dialog result: ${result}`);
+        });
+      }
+
+      openSnackBar(message: string, action: string) {
+        this._snackBar.open(message, action, {
+          duration: 9000,
+        });
+      }
 }
