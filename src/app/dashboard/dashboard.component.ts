@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, VERSION } from '@angular/core';
 import * as Chartist from 'chartist';
 
 @Component({
@@ -7,7 +7,7 @@ import * as Chartist from 'chartist';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+  nameNgVersion = 'Angular ' + VERSION.major;
   constructor() { }
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
