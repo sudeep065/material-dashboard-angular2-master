@@ -1,0 +1,55 @@
+small {
+    font-size: 0.875rem;
+    font-weight: normal;
+  }
+  
+  .bodyBackGround {
+    background: #3494e6;
+    background: linear-gradient(to right, #3494e6);
+    color: #fff;
+    font-family: 'helvetica neue', helvetica, sans-serif;
+    font-size: 15px;
+    margin: 0;
+    padding-bottom: 4rem;
+  }
+  
+  .btn {
+    background-color: #3494e6;
+    border: none;
+    border-radius: 2px;
+    color: #666;
+     cursor: pointer;
+    font-size: inherit;
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .btn:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+  
+  .container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100vw;
+  }
+  
+  .content {
+    max-width: 60rem;
+    text-align: center;
+  }
+  
+  .box {
+    background-color:#f44336;
+    border-radius: 3px;
+    height: 48px;
+    width: 48px;
+    margin: 0 auto;
+    margin-top: 5rem;
+  }
+  
+  .animations {
+    margin-top: 3rem;
+  }
