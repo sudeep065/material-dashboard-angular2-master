@@ -60,5 +60,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'about',           component: MapsComponent },
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'animation',  component: AnimateButtonsComponent },
+    { path: 'topics',  component: AnimateButtonsComponent },
     
 ];
