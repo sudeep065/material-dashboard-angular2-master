@@ -38,7 +38,8 @@
             "allowedCommonJsDependencies" : [
               "rxjs/add/operator/filter",
               "jquery",
-              "chartist"
+              "chartist",
+              "loadash"
             ]
           },
           "configurations": {
