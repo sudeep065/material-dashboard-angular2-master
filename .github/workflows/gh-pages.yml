@@ -1,0 +1,37 @@
+name: Build and deploy to GitHub Pages
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          # Angular 11 is best used with Node 12/14 — choose 14 for compatibility
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (production)
+        # angular.json outputPath is "dist" (build will produce files under ./dist)
+        run: npm run build -- --configuration production --base-href /learnangular/
+
+      - name: Create 404 fallback for SPA routing
+        run: |
+          if [ -f ./dist/index.html ]; then
+            cp ./dist/index.html ./dist/404.html
+          fi
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
