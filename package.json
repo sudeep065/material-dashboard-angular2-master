@@ -16,8 +16,13 @@
     "npm": "3.10.9"
   },
   "private": true,
+  "overrides": {
+    "@babel/core": "7.12.10",
+    "@babel/helpers": "7.12.5",
+    "@babel/plugin-transform-regenerator": "7.12.13",
+    "@babel/preset-env": "7.12.11"
+  },
   "dependencies": {
-    "@agm/core": "^3.0.0-beta.0",
     "@angular/animations": "11.1.0",
     "@angular/cdk": "11.1.0",
     "@angular/common": "11.1.0",

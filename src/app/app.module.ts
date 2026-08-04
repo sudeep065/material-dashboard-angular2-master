@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { AgmCoreModule } from '@agm/core';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
@@ -29,10 +28,7 @@ import { AnimateButtonsComponent } from './ng-animate/components/animate-buttons
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    MatFormFieldModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'
-    })
+    MatFormFieldModule
   ],
   declarations: [
     AppComponent,

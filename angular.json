@@ -40,7 +40,10 @@
               "jquery",
               "chartist",
               "loadash"
-            ]
+            ],
+            "optimization": false,
+            "sourceMap": true,
+            "vendorChunk": true
           },
           "configurations": {
             "production": {
