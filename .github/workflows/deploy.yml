@@ -5,16 +5,22 @@ on:
     branches:
       - main
 
+# grant write permission so GITHUB_TOKEN can push
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
 
     - name: Set up Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v4
       with:
         node-version: '14'
 
@@ -27,5 +33,5 @@ jobs:
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{ secrets.dashboard_github_token }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist/material-dashboard-angular2-master
