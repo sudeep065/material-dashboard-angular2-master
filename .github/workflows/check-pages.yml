@@ -1,0 +1,11 @@
+name: Check Pages headers
+on:
+  workflow_dispatch:
+
+jobs:
+  curl_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show headers
+        run: |
+          curl -I -L https://sudeep065.github.io/material-dashboard-angular2-master || true
