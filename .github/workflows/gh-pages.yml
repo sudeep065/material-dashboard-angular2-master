@@ -1,3 +1,7 @@
+permissions:
+  contents: write
+  pages: write
+
 name: Build and deploy to GitHub Pages
 on:
   push:
@@ -10,21 +14,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
-      - name: Use Node.js
+      - name: Use Node.js (install compatible Node)
         uses: actions/setup-node@v4
         with:
-          # Angular 11 is best used with Node 12/14 — choose 14 for compatibility
           node-version: '14'
+          cache: 'npm'
+
+      - name: Verify Node & npm versions
+        run: |
+          echo "Node: $(node -v)"
+          echo "npm: $(npm -v)"
 
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
 
       - name: Build (production)
-        env:
-          BASE_HREF: /${{ github.event.repository.name }}/
-        # angular.json outputPath is "dist" (build will produce files under ./dist)
-        run: npm run build -- --configuration production --base-href $BASE_HREF
+        run: npm run build -- --configuration production --base-href /material-dashboard-angular2-master/
 
       - name: Create 404 fallback for SPA routing
         run: |
