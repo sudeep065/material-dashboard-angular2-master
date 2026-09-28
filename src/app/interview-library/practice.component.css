@@ -1,0 +1,40 @@
+:host { display: block; min-width: 0; }
+.practice-page { max-width: 900px; min-height: 540px; margin: 0 auto; padding: 42px clamp(22px, 4vw, 58px); color: #26354a; }
+.back-link { display: none; padding: 0; border: 0; background: transparent; color: #276c68; font: inherit; font-weight: 650; cursor: pointer; }
+.practice-topline { display: flex; align-items: flex-end; justify-content: space-between; gap: 22px; }
+.eyebrow { margin: 0 0 9px; color: #477b76; font-size: 11px; font-weight: 750; letter-spacing: .1em; }
+h1 { margin: 0; color: #1d2b3d; font-size: clamp(25px, 2.7vw, 34px); letter-spacing: -.035em; }
+.session-position { padding: 9px 12px; border: 1px solid #e0e7eb; border-radius: 7px; color: #617084; font-size: 13px; font-weight: 650; white-space: nowrap; }
+.progress-track { height: 5px; margin: 23px 0 25px; overflow: hidden; border-radius: 5px; background: #e8eeef; }
+.progress-track span { display: block; height: 100%; border-radius: inherit; background: #2d7771; transition: width .2s ease; }
+.practice-card { padding: clamp(23px, 4vw, 42px); border: 1px solid #e1e7eb; border-radius: 13px; background: #fff; box-shadow: 0 8px 30px rgba(32, 51, 67, .045); }
+.practice-category { margin-bottom: 15px; color: #407771; font-size: 12px; font-weight: 700; }
+.practice-category span { color: #8190a0; font-weight: 550; }
+.practice-card h2 { max-width: 30ch; margin: 0; color: #24354a; font-size: clamp(22px, 2.2vw, 29px); line-height: 1.3; }
+.think-prompt { max-width: 55ch; margin: 18px 0 25px; color: #627185; font-size: 14px; line-height: 1.7; }
+.primary-button, .assessment-button { min-height: 42px; padding: 10px 16px; border: 1px solid #286d69; border-radius: 7px; background: #286d69; color: #fff; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+.primary-button:hover { background: #205b57; }
+.assessment-button { border-color: #dce4e8; background: #fff; color: #364b60; }
+.assessment-button:hover { background: #f5f9f8; }
+.primary-button:focus-visible, .assessment-button:focus-visible, .back-link:focus-visible { outline: 3px solid #5aa49e; outline-offset: 3px; }
+.revealed-answer { max-width: 74ch; margin-top: 27px; padding-top: 22px; border-top: 1px solid #e4e9ee; }
+.revealed-answer h3 { margin: 0 0 14px; color: #27384c; font-size: 16px; }
+.revealed-answer > p { margin: 0 0 16px; color: #34455a; font-size: 14px; line-height: 1.8; white-space: pre-line; overflow-wrap: anywhere; }
+.practice-code { margin: 19px 0; overflow: hidden; border: 1px solid #dfe6eb; border-radius: 8px; background: #f7f9fb; }
+.practice-code > div { padding: 9px 13px; border-bottom: 1px solid #e1e7ec; color: #637286; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+pre { margin: 0; padding: 16px; overflow-x: auto; color: #23354a; font: 12.5px/1.7 Consolas, 'SFMono-Regular', Menlo, monospace; tab-size: 4; }
+code { font: inherit; white-space: pre; }
+.self-assessment { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; margin-top: 25px; padding-top: 18px; border-top: 1px solid #edf0f2; }
+.self-assessment p { flex: 1 0 100%; margin: 0 0 3px; color: #536579; font-size: 13px; font-weight: 650; }
+.save-note { margin: 15px 0 0; color: #7a8796; font-size: 11px; }
+.completion-card { display: grid; min-height: 500px; align-content: center; justify-items: center; padding: 40px 24px; text-align: center; }
+.completion-check { display: grid; width: 52px; height: 52px; place-items: center; border-radius: 50%; background: #e6f4ef; color: #24674f; font-size: 23px; font-weight: 700; }
+.completion-card .eyebrow { margin-top: 22px; }
+.completion-card h1 { max-width: 24ch; }
+.completion-card > p:not(.eyebrow) { max-width: 48ch; margin: 12px 0 20px; color: #667589; font-size: 14px; line-height: 1.65; }
+.summary-stats { display: flex; gap: 14px; margin-bottom: 23px; }
+.summary-stats div { display: grid; min-width: 125px; gap: 4px; padding: 15px; border: 1px solid #e1e7eb; border-radius: 9px; }
+.summary-stats strong { color: #286d69; font-size: 24px; }
+.summary-stats span { color: #667589; font-size: 12px; }
+.empty-session .completion-check { background: #edf4f3; color: #286d69; }
+@media (max-width: 760px) { .practice-page { min-height: 0; padding: 18px; } .back-link { display: block; margin-bottom: 23px; } .practice-topline { align-items: flex-start; flex-direction: column; gap: 14px; } .completion-card { min-height: 360px; } }

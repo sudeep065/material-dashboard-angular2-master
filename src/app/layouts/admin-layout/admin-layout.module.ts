@@ -10,6 +10,9 @@ import { TypographyComponent } from '../../typography/typography.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
+import { InterviewLibraryComponent } from '../../interview-library/interview-library.component';
+import { AnswerReaderComponent } from '../../interview-library/answer-reader.component';
+import { PracticeComponent } from '../../interview-library/practice.component';
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
@@ -39,6 +42,9 @@ import {MatSelectModule} from '@angular/material/select';
     IconsComponent,
     MapsComponent,
     NotificationsComponent,
+    InterviewLibraryComponent,
+    AnswerReaderComponent,
+    PracticeComponent,
   ]
 })
 

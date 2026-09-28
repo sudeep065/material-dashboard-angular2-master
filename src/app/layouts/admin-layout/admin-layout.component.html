@@ -10,12 +10,12 @@
             <app-footer></app-footer>
         </div>
     </div>
-    <div class="fixed-plugin">
-        <div class="dropdown show-dropdown open show">
+    <div class="fixed-plugin" [hidden]="isInterviewRoute()">
+        <div class="dropdown">
             <a href="#" data-toggle="dropdown" aria-expanded="true">
                 <i class="fa fa-cog fa-2x"> </i>
             </a>
-            <ul class="dropdown-menu show" x-placement="bottom-start" style="position: absolute; top: 41px; left: -231px; will-change: top, left;">
+            <ul class="dropdown-menu">
                 <li class="header-title"> Sidebar Filters <span class="small">(click icon to close)</span></li>
                 
                 <li class="adjustments-line">

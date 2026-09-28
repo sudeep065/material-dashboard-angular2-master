@@ -8,6 +8,9 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { AnimateButtonsComponent } from '../../ng-animate/components/animate-buttons/animate-buttons.component';
+import { InterviewLibraryComponent } from '../../interview-library/interview-library.component';
+import { AnswerReaderComponent } from '../../interview-library/answer-reader.component';
+import { PracticeComponent } from '../../interview-library/practice.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -61,5 +64,13 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'animation',  component: AnimateButtonsComponent },
     { path: 'topics',  component: AnimateButtonsComponent },
+        {
+            path: 'interview',
+            component: InterviewLibraryComponent,
+            children: [
+                { path: 'practice', component: PracticeComponent },
+                { path: ':questionId', component: AnswerReaderComponent }
+            ]
+        },
     
 ];

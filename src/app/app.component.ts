@@ -11,8 +11,11 @@ export class AppComponent {
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        (<any>window).ga('set', 'page', event.urlAfterRedirects);
-        (<any>window).ga('send', 'pageview');
+        const analytics = (<any>window).ga;
+        if (typeof analytics === 'function') {
+          analytics('set', 'page', event.urlAfterRedirects);
+          analytics('send', 'pageview');
+        }
       }
     });
   }

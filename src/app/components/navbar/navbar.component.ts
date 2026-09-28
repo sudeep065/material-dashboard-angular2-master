@@ -24,7 +24,9 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.openSnackBar('Please check our website frequently many topics will be added', 'This is SnackBar Sample.');
+                if (this.router.url.indexOf('/interview') !== 0) {
+                    this.openSnackBar('Please check our website frequently many topics will be added', 'This is SnackBar Sample.');
+                }
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
@@ -119,8 +121,8 @@ export class NavbarComponent implements OnInit {
           titlee = titlee.slice( 1 );
       }
 
-      for(var item = 0; item < this.listTitles.length; item++){
-          if(this.listTitles[item].path === titlee){
+      for (let item = 0; item < this.listTitles.length; item++) {
+          if (titlee === this.listTitles[item].path || titlee.indexOf(this.listTitles[item].path + '/') === 0) {
               return this.listTitles[item].title;
           }
       }

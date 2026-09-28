@@ -1,0 +1,59 @@
+<section class="practice-page" aria-labelledby="practice-title">
+  <button class="back-link" type="button" (click)="backToResults()">← Back to results</button>
+
+  <ng-container *ngIf="!missingSession && !completed && question">
+    <header class="practice-topline">
+      <div>
+        <p class="eyebrow">PRACTICE SESSION</p>
+        <h1 id="practice-title">Think it through, then reveal</h1>
+      </div>
+      <span class="session-position">Question {{ position + 1 }} <span aria-hidden="true">/</span> {{ total }}</span>
+    </header>
+    <div class="progress-track" role="progressbar" [attr.aria-valuenow]="position" [attr.aria-valuemin]="0" [attr.aria-valuemax]="total" [attr.aria-label]="'Practice progress: question ' + (position + 1) + ' of ' + total">
+      <span [style.width.%]="total ? (position / total) * 100 : 0"></span>
+    </div>
+    <article class="practice-card">
+      <div class="practice-category">{{ categoryName(question.categoryId) }} <span>· {{ question.id }}</span></div>
+      <h2>{{ question.title }}</h2>
+      <p class="think-prompt" *ngIf="!answerRevealed">Take a moment to organize your answer. The full explanation stays hidden until you are ready.</p>
+
+      <button *ngIf="!answerRevealed" type="button" class="primary-button reveal-button" (click)="revealAnswer()">Reveal answer</button>
+      <div *ngIf="answerRevealed" class="revealed-answer" aria-live="polite">
+        <h3>Answer</h3>
+        <ng-container *ngFor="let section of question.sections">
+          <p *ngIf="section.type === 'paragraph'">{{ section.content }}</p>
+          <section *ngIf="section.type === 'code'" class="practice-code">
+            <div>{{ section.language || 'Code example' }}</div>
+            <pre><code>{{ section.content }}</code></pre>
+          </section>
+        </ng-container>
+        <div class="self-assessment" aria-label="Assess this answer">
+          <p>How did that feel?</p>
+          <button type="button" class="assessment-button" (click)="assess('needs-review')">Needs review</button>
+          <button type="button" class="primary-button" (click)="assess('confident')">Confident</button>
+        </div>
+      </div>
+    </article>
+    <p class="save-note">Your assessment is saved on this browser and device.</p>
+  </ng-container>
+
+  <section *ngIf="completed" class="completion-card" aria-live="polite">
+    <div class="completion-check" aria-hidden="true">✓</div>
+    <p class="eyebrow">SESSION COMPLETE</p>
+    <h1 id="practice-title">Nice work. You made progress.</h1>
+    <p>You reviewed {{ summary.total }} {{ summary.total === 1 ? 'question' : 'questions' }} in this session.</p>
+    <div class="summary-stats">
+      <div><strong>{{ summary.confident }}</strong><span>Confident</span></div>
+      <div><strong>{{ summary.needsReview }}</strong><span>Needs review</span></div>
+    </div>
+    <button type="button" class="primary-button" (click)="backToResults()">Back to results</button>
+  </section>
+
+  <section *ngIf="missingSession" class="completion-card empty-session" role="status">
+    <div class="completion-check" aria-hidden="true">↗</div>
+    <p class="eyebrow">PRACTICE SESSION</p>
+    <h1 id="practice-title">No practice questions yet</h1>
+    <p>Start a session from a non-empty set of filtered questions. Your current filters will be used to build it.</p>
+    <button type="button" class="primary-button" (click)="backToResults()">Choose questions</button>
+  </section>
+</section>

@@ -141,6 +141,9 @@ export class AdminLayoutComponent implements OnInit {
           return true;
       }
   }
+    isInterviewRoute(): boolean {
+            return this.router.url.indexOf('/interview') === 0;
+    }
   runOnRouteChange(): void {
     if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
       const elemMainPanel = <HTMLElement>document.querySelector('.main-panel');

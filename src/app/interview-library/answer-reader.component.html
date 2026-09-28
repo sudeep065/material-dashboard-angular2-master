@@ -1,0 +1,72 @@
+<article class="answer-reader" *ngIf="question; else readerMessage" aria-labelledby="answer-title">
+  <button class="back-link" type="button" (click)="backToResults()">
+    <span aria-hidden="true">←</span> Back to results
+  </button>
+
+  <header class="reader-header">
+    <div class="reader-eyebrow">
+      <span>{{ categoryName }}</span>
+      <span class="question-id">{{ question.id }}</span>
+    </div>
+    <h1 id="answer-title">{{ question.title }}</h1>
+    <div class="reader-actions">
+      <button type="button" class="quiet-button" (click)="toggleBookmark()" [attr.aria-pressed]="bookmarked">
+        <span aria-hidden="true">{{ bookmarked ? '★' : '☆' }}</span>
+        {{ bookmarked ? 'Bookmarked' : 'Bookmark' }}
+      </button>
+      <span class="status-label" [ngClass]="'status-' + status">{{ status === 'new' ? 'Not reviewed' : status === 'needs-review' ? 'Needs review' : 'Confident' }}</span>
+    </div>
+  </header>
+
+  <div class="answer-body">
+    <ng-container *ngFor="let section of question.sections; let index = index">
+      <p *ngIf="section.type === 'paragraph'" class="answer-paragraph">{{ section.content }}</p>
+      <section *ngIf="section.type === 'code'" class="code-card" [attr.aria-label]="section.language ? section.language + ' code example' : 'Code example'">
+        <div class="code-toolbar">
+          <span>{{ section.language || 'Code example' }}</span>
+          <button type="button" class="copy-button" (click)="copyCode(section.content, index)" [attr.aria-label]="'Copy code example ' + (index + 1)">
+            {{ copiedSection === index ? 'Copied' : 'Copy code' }}
+          </button>
+        </div>
+        <pre><code>{{ section.content }}</code></pre>
+      </section>
+    </ng-container>
+  </div>
+
+  <details class="source-disclosure" *ngIf="question.variants.length || question.references.length">
+    <summary>Question wordings and sources</summary>
+    <div class="disclosure-content">
+      <section *ngFor="let variant of question.variants" class="variant-entry">
+        <p>{{ variant.wording }}</p>
+        <ul *ngIf="variant.sources.length">
+          <li *ngFor="let source of variant.sources">{{ source }}</li>
+        </ul>
+      </section>
+      <section *ngIf="question.references.length" class="reference-list">
+        <h2>References and further reading</h2>
+        <ul><li *ngFor="let reference of question.references">{{ reference }}</li></ul>
+      </section>
+    </div>
+  </details>
+
+  <footer class="reader-footer">
+    <div class="assessment-actions" aria-label="Study assessment">
+      <button type="button" class="assessment-button" [class.is-active]="status === 'needs-review'" (click)="setStatus('needs-review')">Needs review</button>
+      <button type="button" class="assessment-button" [class.is-active]="status === 'confident'" (click)="setStatus('confident')">Confident</button>
+    </div>
+    <nav class="question-navigation" aria-label="Question navigation">
+      <button type="button" class="quiet-button" [disabled]="!previousId" (click)="navigateQuestion(previousId)">← Previous</button>
+      <button type="button" class="primary-button" [disabled]="!nextId" (click)="navigateQuestion(nextId)">Next question →</button>
+    </nav>
+  </footer>
+  <p class="save-note">Your study progress is saved on this browser and device.</p>
+</article>
+
+<ng-template #readerMessage>
+  <section class="reader-empty" role="status" aria-live="polite">
+    <div class="empty-icon" aria-hidden="true">?</div>
+    <h2>{{ errorMessage ? 'Question unavailable' : 'Choose a question to begin' }}</h2>
+    <p>{{ errorMessage || 'Select a question from the results to read its full answer.' }}</p>
+    <button *ngIf="errorMessage" type="button" class="primary-button" (click)="backToResults()">Back to results</button>
+  </section>
+</ng-template>

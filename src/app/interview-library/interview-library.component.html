@@ -1,0 +1,83 @@
+<main class="interview-page" aria-labelledby="library-title">
+  <header class="page-heading">
+    <div>
+      <p class="page-kicker">STUDY SPACE</p>
+      <h1 id="library-title">Interview Library</h1>
+      <p class="page-intro">A focused place to explore questions, review detailed answers, and track your progress.</p>
+    </div>    
+  </header>
+
+  <section class="toolbar" aria-label="Search and filter questions">
+    <label class="search-field">
+      <span class="search-icon" aria-hidden="true">⌕</span>
+      <span class="visually-hidden">Search questions and answers</span>
+      <input #searchInput type="search" name="question-search" [(ngModel)]="filters.query" (ngModelChange)="filterChanged()" placeholder="Search questions, topics, and answers" autocomplete="off">
+      <span class="keyboard-hint" aria-hidden="true">⌘ K</span>
+    </label>
+    <label class="filter-control">
+      <span class="visually-hidden">Filter by category</span>
+      <select name="category-filter" [(ngModel)]="filters.categoryId" (ngModelChange)="filterChanged()">
+        <option value="">All categories</option>
+        <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+      </select>
+    </label>
+    <label class="filter-control status-control">
+      <span class="visually-hidden">Filter by study status</span>
+      <select name="status-filter" [(ngModel)]="filters.status" (ngModelChange)="filterChanged()">
+        <option value="">All progress</option>
+        <option value="new">Not reviewed</option>
+        <option value="needs-review">Needs review</option>
+        <option value="confident">Confident</option>
+      </select>
+    </label>
+    <button type="button" class="bookmark-filter" [class.is-active]="filters.bookmarkedOnly" [attr.aria-pressed]="filters.bookmarkedOnly" (click)="filters.bookmarkedOnly = !filters.bookmarkedOnly; filterChanged()">
+      <span aria-hidden="true">☆</span> Bookmarks
+    </button>
+    <button type="button" class="start-button" (click)="startPractice()"><span aria-hidden="true">▶</span> Start practice</button>
+  </section>
+
+  <p class="filter-notice" *ngIf="showPracticeEmpty" role="alert">There are no questions in this filtered set. Adjust your filters before starting a practice session.</p>
+
+  <section class="library-shell" [class.answer-open]="activeQuestionId || routeChildIsPractice" aria-label="Interview question library">
+    <aside class="question-panel" aria-label="Question results">
+      <div class="results-heading">
+        <div>
+          <h2>Questions</h2>
+          <p>{{ results.length }} {{ results.length === 1 ? 'result' : 'results' }}<span *ngIf="questions.length"> · {{ questions.length }} total</span></p>
+        </div>
+        <button type="button" class="clear-button" *ngIf="filters.query || filters.categoryId || filters.bookmarkedOnly || filters.status" (click)="clearFilters()">Clear filters</button>
+      </div>
+
+      <div class="panel-message" *ngIf="loading" role="status">Loading the interview library…</div>
+      <div class="panel-message error-message" *ngIf="!loading && loadError" role="alert">{{ loadError }}</div>
+      <div class="panel-message" *ngIf="!loading && !loadError && !results.length">
+        <span class="empty-glyph" aria-hidden="true">⌕</span>
+        <strong>No questions found</strong>
+        <p>Try another search or clear one or more filters.</p>
+        <button type="button" class="clear-empty-button" (click)="clearFilters()">Clear filters</button>
+      </div>
+
+      <nav class="question-list" *ngIf="results.length" aria-label="Question results list">
+        <a class="question-item" *ngFor="let question of results" [routerLink]="[question.id]" [queryParamsHandling]="'merge'" [class.is-selected]="activeQuestionId === question.id" [attr.aria-current]="activeQuestionId === question.id ? 'page' : null">
+          <span class="question-item-top"><span class="item-category">{{ categoryName(question.categoryId) }}</span><span class="item-id">{{ question.id }}</span></span>
+          <span class="item-title">{{ question.title }}</span>
+          <span class="item-meta">
+            <span class="study-dot" [ngClass]="'dot-' + statusFor(question.id)" aria-hidden="true"></span>
+            <span>{{ statusFor(question.id) === 'new' ? 'Not reviewed' : statusFor(question.id) === 'needs-review' ? 'Needs review' : 'Confident' }}</span>
+          </span>
+        </a>
+      </nav>
+      <p class="device-note">Progress is stored on this browser and device.</p>
+    </aside>
+
+    <section class="reader-panel" aria-label="Selected answer">
+      <router-outlet></router-outlet>
+      <div class="reader-placeholder" *ngIf="!activeQuestionId && !routeChildIsPractice && !loading && !loadError">
+        <div class="placeholder-mark" aria-hidden="true">Aa</div>
+        <h2>Your reading space</h2>
+        <p>Select a question to see its complete answer, examples, and references.</p>
+        <span class="placeholder-tip">Tip: search by question wording or a phrase from an explanation.</span>
+      </div>
+    </section>
+  </section>
+</main>
