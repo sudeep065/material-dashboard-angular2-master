@@ -32,7 +32,7 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Build (production)
-        run: npm run build -- --configuration production --base-href /material-dashboard-angular2-master/
+        run: npm run build -- --configuration production --base-href /learn-angular/
 
       - name: Create 404 fallback for SPA routing
         run: |

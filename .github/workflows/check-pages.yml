@@ -8,4 +8,4 @@ jobs:
     steps:
       - name: Show headers
         run: |
-          curl -I -L https://sudeep065.github.io/material-dashboard-angular2-master || true
+          curl -I -L https://sudeep065.github.io/learn-angular || true
