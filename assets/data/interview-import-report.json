@@ -1,0 +1,30 @@
+{
+  "sourceFile": "CHATGPT-complete_interview_questions_and_detailed_answers.docx",
+  "categoryCount": 13,
+  "answerBlockCount": 202,
+  "alternateWordingCount": 332,
+  "sourceMappingCount": 332,
+  "answerSectionCount": 582,
+  "codeSectionCount": 10,
+  "categoryTotals": {
+    "C# and .NET": 31,
+    "Asynchronous Programming and Performance": 13,
+    "ASP.NET Core and Web API": 30,
+    "SQL Server and Entity Framework Core": 32,
+    "Caching and Redis": 5,
+    "React": 7,
+    "Architecture and Distributed Systems": 20,
+    "Azure Integration and Delivery": 19,
+    "Security and Identity": 13,
+    "Generative AI and RAG": 7,
+    "Production Troubleshooting and Leadership": 16,
+    "Testing": 7,
+    "Coding Exercises": 2
+  },
+  "conversionNotes": [
+    "The 68 source Code paragraphs are grouped into 10 multiline code examples with original indentation and paragraph breaks. Their C# or SQL languages are detected from the code constructs.",
+    "The document includes two structural Heading1 sections (Categories and Source Coverage and Reading Notes) in addition to the 13 question categories; neither is an answer category.",
+    "Personal-experience answers and hypothetical example language are retained verbatim in the source-derived paragraphs; no hypothetical first-person experience was added.",
+    "The document notes that original wording appears bold, but its XML applies the same bold Question paragraph style to all 332 wordings and has no distinct original/alternate marker. No variant is guessed as original; all wordings remain grouped under their shared answer with their own Source labels."
+  ]
+}
